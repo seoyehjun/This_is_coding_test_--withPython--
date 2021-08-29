@@ -1,1 +1,22 @@
-print(list(map(int, input().split(' '))))#map()은 map객체를 반환하기 때문에 list() 혹은 tuple()로 변환해서 써주자
+from collections import deque
+
+
+def dfs(graph, v, visited):
+    visited[v] = True#v번째 노드는 방문완료
+    print(v,end=' ')
+    for i in graph[v]:
+        if visited[i]==False:
+            dfs(graph, i , visited) #재귀
+
+
+
+def bfs(graph, start, visited):
+    queue = deque([start])
+    visited[start] = True
+    while queue:
+        
+
+
+    
+visited =[False]*9
+graph = [ [], [2,3,8],[1,7],[1,4,5],[3,5],[3,4],[7],[2,6,8],[1,7]]
