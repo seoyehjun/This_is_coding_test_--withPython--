@@ -1,26 +1,27 @@
 from collections import deque
 
-graph = [[], [2,3,8], [1,7],[1,4,5],[3,5],[3,4],[7],[2,6,8],[1,7]]
 
-visited = [False]*9
+def dfs(graph, v, visited):#함수 1회 호출 == 탐색(visited - True로 설정)
+    visited[v] = True#v번째 노드는 방문완료
+    print(v,end=' ')
+    for i in graph[v]:
+        if visited[i]==False:
+            dfs(graph, i , visited) #재귀
 
-def dfs(graph, i, visited):
-    visited[i] = True
-    print(i,'노드 탐색')
-    for var in graph[i]:
-        if visited[var] == False:
-            dfs(graph,var, visited)
 
-def bfs(graph, i, visited):
-    queue = deque([i])
-    visited[i] = True
-    
+
+def bfs(graph, start, visited):
+    queue = deque([start])
+    visited[start] = True
     while queue:
-        v = queue.popleft()
-
-        for var in graph[v]:#해당 노드가 탐색된적 있어도 해당노드 연결정보 검사
-            #탐색여부 검사후 큐에 붙이고 탐색한다 큐에 붙이면 해당노드의 연결정보 검사해준다
+        node_linked = queue.popleft()
+        for var in graph[node_linked]:
             if visited[var] == False:
-                queue.append(var)#큐에 붙이는건 노드의 인덱스이다
+                queue.append(var)
                 visited[var] = True
-                print(v,'노드 탐색')
+                print('탐색',node_linked)
+
+    
+visited =[False]*9#인덱스 8까지 존재
+graph = [ [], [2,3,8],[1,7],[1,4,5],[3,5],[3,4],[7],[2,6,8],[1,7]]
+bfs(graph, 1, visited)
